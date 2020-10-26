@@ -14,8 +14,8 @@ int main()
   int * environment = createEnvironment(limit);
 
   //obtain screen limits
-  int height = 50, width = 200;
-  //getmaxyx(stdscr, height, width);
+  int height, width;
+  getmaxyx(stdscr, height, width);
 
   //call structures to be implemented
   r_pentominio(25, 25, limit, environment);
@@ -31,6 +31,7 @@ int main()
     environment = nextframe(offset, limit, environment);
   }
 
+  //finish program cleanly
   free(environment);
   endwin();
   return 0;

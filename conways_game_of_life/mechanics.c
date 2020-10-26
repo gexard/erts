@@ -14,17 +14,18 @@ int * createEnvironment(int * limit)
 
 void visualize(int height, int width, int * offset, int * limit, int * environment)
 {
+  //iterate through all cells in the visible environment
   for (int i = 0; i < height; i++)
   {
     for (int j = 0; j < width; j++)
     {
       if (environment[(i + offset[0]) * limit[0] + (j + offset[1])] == 1)
       {
-        mvaddch(i,j,'X'); //marks any alive cell with an 'X'
+        mvaddch(i,j,'X'); //mark any alive cell with an 'X'
       }
       else
       {
-        mvaddch(i,j,' '); //makes sure all dead cells are empty
+        mvaddch(i,j,' '); //make sure all dead cells are empty
       }
     }
   }
@@ -43,15 +44,15 @@ int * nextframe(int * offset, int * limit, int * environment)
     }
   }
 
-  //modify environment indicators {(offset), (limit)}
+  //create variables for modify-environment indicators {(offset), (limit)}
   int mod_e[2] = {0, 0};
 
-  //check life status
+  //check life status by counting the number of neighbors
   int neighbors;
-  for (int i = 1; i < limit[0] - 1; i++) //the range excludes the outer cells for
-  {                                   //correct neighbor calculation
-    for (int j = 1; j < limit[0] - 1; j++)
-    {
+  for (int i = 1; i < limit[0] - 1; i++)   //the range excludes the outer cells for
+  {                                        //correct neighbor calculation, but the
+    for (int j = 1; j < limit[0] - 1; j++) //limits will be increased when a live cell
+    {                                      //approaches the edge
       neighbors = 0;
       // count neighbors around cell (i,j)
       for (int k = 0; k < 3; k++)
@@ -64,7 +65,7 @@ int * nextframe(int * offset, int * limit, int * environment)
           }
         }
       }
-      //determine alive status of cell (i,j)
+      //determine status of cell (i,j) for next frame
       if (neighbors < 2 || neighbors > 3) //death conditions
       {
         environment[i * limit[0] + j] = 0;
