@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -I/usr/include/ -I.
+CFLAGS = -Wall -I/usr/include/ -I. -g
 LDFLAGS = -lncurses
 DEPS = conway.h
 OBJ = main.o mechanics.o structures.o
